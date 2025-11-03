@@ -4,10 +4,6 @@
  */
 package Interfaces;
 
-/**
- *
- * @author Moises Liota
- */
 public class Bienvenido extends javax.swing.JFrame {
 
     /**
@@ -15,6 +11,9 @@ public class Bienvenido extends javax.swing.JFrame {
      */
     public Bienvenido() {
         initComponents();
+        this.setVisible(true);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
     }
 
     /**
