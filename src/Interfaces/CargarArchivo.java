@@ -83,6 +83,11 @@ public class CargarArchivo extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 260, 210));
 
         cargar.setText("Cargar");
+        cargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarActionPerformed(evt);
+            }
+        });
         jPanel1.add(cargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 260, -1));
 
         limpiar.setText("Limpiar");
@@ -146,6 +151,10 @@ public class CargarArchivo extends javax.swing.JFrame {
         Bienvenido v1 = new Bienvenido();
         this.dispose();
     }//GEN-LAST:event_atrasActionPerformed
+
+    private void cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarActionPerformed
+        
+    }//GEN-LAST:event_cargarActionPerformed
 
     /**
      * @param args the command line arguments
