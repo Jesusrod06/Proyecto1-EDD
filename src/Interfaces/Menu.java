@@ -11,6 +11,9 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        this.setVisible(true);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
     }
 
     /**

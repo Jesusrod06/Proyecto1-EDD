@@ -4,6 +4,8 @@
  */
 package Interfaces;
 
+import EDD.Grafo;
+import GestionArchivos.Cargar;
 import GestionArchivos.FileChooser;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -12,9 +14,9 @@ import javax.swing.JOptionPane;
 
 public class CargarArchivo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CargarArchivo
-     */
+    public static Grafo grafo = new Grafo();
+    Cargar cargarG = new Cargar(grafo);
+
     public CargarArchivo() {
         initComponents();
         this.setVisible(true);
@@ -142,7 +144,7 @@ public class CargarArchivo extends javax.swing.JFrame {
             // Si elige "Sí", limpiamos los campos
             ruta.setText("");
             archivo.setText("");
-            
+
             JOptionPane.showMessageDialog(null, "Ruta y visulizador del contenido del archivo limpiados correctamente.");
         }
     }//GEN-LAST:event_limpiarActionPerformed
@@ -153,7 +155,22 @@ public class CargarArchivo extends javax.swing.JFrame {
     }//GEN-LAST:event_atrasActionPerformed
 
     private void cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarActionPerformed
-        
+        if (!archivo.getText().isEmpty()) {
+            cargarG.setTxt(archivo.getText());
+            cargarG.cargarTxt();
+
+            if (!grafo.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Grafo cargado correctamente.");
+                Menu menu = new Menu();
+                this.dispose();
+                System.out.println(grafo.toString());
+            }else{
+                JOptionPane.showMessageDialog(null, "No se pudo cargar el grafo correctamente.");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes buscar una archivo para poder cargarlo.");
+        }
     }//GEN-LAST:event_cargarActionPerformed
 
     /**
