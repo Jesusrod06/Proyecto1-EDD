@@ -4,6 +4,11 @@
  */
 package Interfaces;
 
+import GestionArchivos.FileChooser;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class CargarArchivo extends javax.swing.JFrame {
 
@@ -27,15 +32,120 @@ public class CargarArchivo extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        exit = new javax.swing.JButton();
+        atras = new javax.swing.JButton();
+        ruta = new javax.swing.JTextField();
+        buscar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        archivo = new javax.swing.JTextArea();
+        cargar = new javax.swing.JButton();
+        limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 430));
+
+        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
+        jLabel1.setText("CARGAR ARCHIVO");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
+
+        exit.setText("X");
+        exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            }
+        });
+        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 50, 40));
+
+        atras.setText("<-");
+        atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atrasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, 30));
+        jPanel1.add(ruta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 260, -1));
+
+        buscar.setText("buscar");
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, -1));
+
+        archivo.setColumns(20);
+        archivo.setRows(5);
+        jScrollPane1.setViewportView(archivo);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 260, 210));
+
+        cargar.setText("Cargar");
+        jPanel1.add(cargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 260, -1));
+
+        limpiar.setText("Limpiar");
+        limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 410));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        FileChooser chooser = new FileChooser(this);
+        try {
+            chooser.fileChooser();
+        } catch (IOException ex) {
+            Logger.getLogger(CargarArchivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Luego de usar el método, ya puedes obtener los valores:
+        String rutaF = chooser.getRuta();
+        String texto = chooser.getContenido();
+
+        if (rutaF != null && texto != null) {
+            ruta.setText(rutaF);
+            archivo.setText(texto);
+        }
+    }//GEN-LAST:event_buscarActionPerformed
+
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exitActionPerformed
+
+    private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
+        if (!ruta.getText().isEmpty() || !archivo.getText().isEmpty()) {
+            int opcion = JOptionPane.showConfirmDialog(
+                    this,
+                    "Ya hay datos cargados.\n¿Deseas limpiarlos y cargar un nuevo archivo?",
+                    "Confirmar acción",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            if (opcion != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            // Si elige "Sí", limpiamos los campos
+            ruta.setText("");
+            archivo.setText("");
+            
+            JOptionPane.showMessageDialog(null, "Ruta y visulizador del contenido del archivo limpiados correctamente.");
+        }
+    }//GEN-LAST:event_limpiarActionPerformed
+
+    private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
+        Bienvenido v1 = new Bienvenido();
+        this.dispose();
+    }//GEN-LAST:event_atrasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -73,6 +183,15 @@ public class CargarArchivo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea archivo;
+    private javax.swing.JButton atras;
+    private javax.swing.JButton buscar;
+    private javax.swing.JButton cargar;
+    private javax.swing.JButton exit;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton limpiar;
+    private javax.swing.JTextField ruta;
     // End of variables declaration//GEN-END:variables
 }

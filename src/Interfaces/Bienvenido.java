@@ -40,6 +40,11 @@ public class Bienvenido extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
         empezar.setText("Empezar");
+        empezar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                empezarActionPerformed(evt);
+            }
+        });
         jPanel1.add(empezar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 190, -1));
 
         exit.setText("X");
@@ -58,6 +63,11 @@ public class Bienvenido extends javax.swing.JFrame {
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitActionPerformed
+
+    private void empezarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empezarActionPerformed
+        CargarArchivo carga = new CargarArchivo();
+        this.dispose();
+    }//GEN-LAST:event_empezarActionPerformed
 
     /**
      * @param args the command line arguments
