@@ -4,6 +4,7 @@
  */
 package proyecto1.edd;
 
+import Interfaces.Bienvenido;
 
 public class Proyecto1EDD {
 
@@ -11,7 +12,7 @@ public class Proyecto1EDD {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Bienvenido v1 = new Bienvenido();
     }
     
 }

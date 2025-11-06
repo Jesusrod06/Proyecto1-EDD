@@ -78,6 +78,24 @@ public class Grafo {
             }
         }
     }
+    
+    public void seguirUsuarioCarga(String nombreUsuario1, String nombreUsuario2) {
+        if (this.buscar(nombreUsuario1) != null && this.buscar(nombreUsuario2) != null) {
+            Vertice usuarioInicial = buscar(nombreUsuario1);
+            Vertice usuarioFinal = buscar(nombreUsuario2);
+
+            usuarioInicial.getAdyacentes().insertarFinal(usuarioFinal);
+            //JOptionPane.showMessageDialog(null, "Usuario " + nombreUsuario1 + " siguiendo a " + nombreUsuario2);
+        } else {
+            if (this.buscar(nombreUsuario1) == null && this.buscar(nombreUsuario2) != null) {
+                JOptionPane.showMessageDialog(null, "El usuario " + nombreUsuario1 + " no existe");
+            } else if (this.buscar(nombreUsuario1) != null && this.buscar(nombreUsuario2) == null) {
+                JOptionPane.showMessageDialog(null, "El usuario " + nombreUsuario2 + " no existe");
+            } else {
+                JOptionPane.showMessageDialog(null, "Ninguna de los usuarios existe.");
+            }
+        }
+    }
 
     public void dejarDeSeguir(String nombreUsuario1, String nombreUsuario2) {
         if (this.buscar(nombreUsuario1) != null && this.buscar(nombreUsuario2) != null) {
