@@ -4,6 +4,8 @@
  */
 package Interfaces;
 
+import static Interfaces.CargarArchivo.grafo;
+
 public class Menu extends javax.swing.JFrame {
 
     /**
@@ -47,9 +49,19 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 130, -1));
 
         mostrar.setText("Mostrar Grafo");
+        mostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarActionPerformed(evt);
+            }
+        });
         jPanel1.add(mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 130, -1));
 
         cargar.setText("Cargar Archivo");
+        cargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarActionPerformed(evt);
+            }
+        });
         jPanel1.add(cargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 130, -1));
 
         agregar.setText("Conexion Fuerte");
@@ -65,6 +77,21 @@ public class Menu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
+        System.setProperty("org.graphstream.ui", "swing");
+        System.setProperty("org.graphstream.ui.layout.spring.length", "200");
+        System.setProperty("org.graphstream.ui.layout.spring.stiffness", "0.05");
+
+        GrafoVisualizador verGrafo = new GrafoVisualizador(grafo);
+        verGrafo.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mostrarActionPerformed
+
+    private void cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarActionPerformed
+        CargarArchivo cargar = new CargarArchivo();
+        this.dispose();
+    }//GEN-LAST:event_cargarActionPerformed
 
     /**
      * @param args the command line arguments

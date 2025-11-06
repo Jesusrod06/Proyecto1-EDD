@@ -156,6 +156,8 @@ public class CargarArchivo extends javax.swing.JFrame {
 
     private void cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarActionPerformed
         if (!archivo.getText().isEmpty()) {
+            grafo.destruir();
+            
             cargarG.setTxt(archivo.getText());
             cargarG.cargarTxt();
 

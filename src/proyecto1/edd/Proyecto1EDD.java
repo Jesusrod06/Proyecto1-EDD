@@ -6,7 +6,6 @@ package proyecto1.edd;
 
 import Interfaces.Bienvenido;
 
-
 public class Proyecto1EDD {
 
     /**
