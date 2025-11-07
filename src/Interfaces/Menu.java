@@ -68,6 +68,11 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 130, -1));
 
         agregar1.setText("Agregar Usuario");
+        agregar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregar1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(agregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 130, -1));
 
         jButton1.setText("Guardar");
@@ -92,6 +97,11 @@ public class Menu extends javax.swing.JFrame {
         CargarArchivo cargar = new CargarArchivo();
         this.dispose();
     }//GEN-LAST:event_cargarActionPerformed
+
+    private void agregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar1ActionPerformed
+        AgregarUsuario agregar = new AgregarUsuario();
+        this.dispose();
+    }//GEN-LAST:event_agregar1ActionPerformed
 
     /**
      * @param args the command line arguments
