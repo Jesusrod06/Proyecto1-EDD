@@ -4,17 +4,32 @@
  */
 package Interfaces;
 
+import EDD.Vertice;
+import static Interfaces.CargarArchivo.grafo;
+import javax.swing.DefaultComboBoxModel;
+
 public class EliminarUsuarios extends javax.swing.JFrame {
 
-    /**
-     * Creates new form EliminarUsuarios
-     */
+    DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
+    
     public EliminarUsuarios() {
         initComponents();
         this.setVisible(true);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.ActualizarComboBox();
     }
+    
+    private void ActualizarComboBox() {
+        modeloCombo.removeAllElements();
+        if (!grafo.isEmpty()) {
+            for (int i = 0; i < grafo.getUsuarios().getSize(); i++) {
+                Vertice verticeActual = (Vertice) grafo.getUsuarios().getValor(i);
+                modeloCombo.addElement(verticeActual.getNombre());
+            }
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,25 +57,55 @@ public class EliminarUsuarios extends javax.swing.JFrame {
         jLabel1.setText("Eliminar Usuario");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, -1));
 
-        usuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        usuarios.setModel(modeloCombo);
         jPanel1.add(usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 230, -1));
 
         jLabel2.setText("Elija el usuario que desea eliminar:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
         eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
         jPanel1.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 230, -1));
 
         dSeguir.setText("Dejar de Seguir");
+        dSeguir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dSeguirActionPerformed(evt);
+            }
+        });
         jPanel1.add(dSeguir, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, -1, -1));
 
         atras.setText("<-");
+        atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atrasActionPerformed(evt);
+            }
+        });
         jPanel1.add(atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 210));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+       String nombreUsuario1 = (String) usuarios.getSelectedItem();
+        grafo.eliminarUsuario(nombreUsuario1);
+        this.ActualizarComboBox();
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
+        Menu menu = new Menu();
+        this.dispose();
+    }//GEN-LAST:event_atrasActionPerformed
+
+    private void dSeguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dSeguirActionPerformed
+        DejarSeguir dSeguir = new DejarSeguir();
+    }//GEN-LAST:event_dSeguirActionPerformed
 
     /**
      * @param args the command line arguments

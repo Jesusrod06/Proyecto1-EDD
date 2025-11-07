@@ -92,6 +92,11 @@ public class AgregarSeguidor extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
 
         principal.setModel(modeloCombo);
+        principal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                principalActionPerformed(evt);
+            }
+        });
         jPanel1.add(principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 170, -1));
 
         jLabel2.setText("Cuenta Principal");
@@ -132,7 +137,12 @@ public class AgregarSeguidor extends javax.swing.JFrame {
         String nombreUsuario1 = (String) principal.getSelectedItem();
         String nombreUsuario2 = (String) aSeguir.getSelectedItem();
         grafo.seguirUsuario(nombreUsuario1, nombreUsuario2);
+        this.ActualizarComboBox();
     }//GEN-LAST:event_seguirActionPerformed
+
+    private void principalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_principalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_principalActionPerformed
 
     /**
      * @param args the command line arguments

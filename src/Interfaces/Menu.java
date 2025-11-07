@@ -46,6 +46,11 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
 
         eliminar.setText("Eliminar Usuario");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
         jPanel1.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 130, -1));
 
         mostrar.setText("Mostrar Grafo");
@@ -102,6 +107,11 @@ public class Menu extends javax.swing.JFrame {
         AgregarUsuario agregar = new AgregarUsuario();
         this.dispose();
     }//GEN-LAST:event_agregar1ActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        EliminarUsuarios eliminarU = new EliminarUsuarios();
+        this.dispose();
+    }//GEN-LAST:event_eliminarActionPerformed
 
     /**
      * @param args the command line arguments
