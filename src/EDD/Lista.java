@@ -258,38 +258,6 @@ public class Lista {
     }
 
     /**
-     * Edita el valor de un nodo que tiene una referencia específica.
-     * 
-     * @param referencia La referencia del nodo a editar.
-     * @param dato El nuevo valor del nodo.
-     */
-    public void editarPorReferencia(Object referencia, Object dato) {
-        if (buscar(referencia)) {
-            Nodo aux = pFirst;
-            while (aux.getDato() != referencia) {
-                aux = aux.getPnext();
-            }
-            aux.setDato(dato);
-        }
-    }
-
-    /**
-     * Edita el valor de un nodo en una posición específica.
-     * 
-     * @param posicion La posición del nodo a editar.
-     * @param dato El nuevo valor del nodo.
-     */
-    public void editarPorPosicion(int posicion, Object dato) {
-        if (posicion >= 0 && posicion < size) {
-            Nodo aux = pFirst;
-            for (int i = 0; i < posicion; i++) {
-                aux = aux.getPnext();
-            }
-            aux.setDato(dato);
-        }
-    }
-
-    /**
      * Obtiene el valor de un nodo en una posición específica.
      * 
      * @param posicion La posición del nodo.
@@ -304,63 +272,6 @@ public class Lista {
             return aux.getDato();
         }
         return null;
-    }
-
-    /**
-     * Obtiene el nodo en una posición específica.
-     * 
-     * @param posicion La posición del nodo.
-     * @return El nodo o {@code null} si la posición es inválida.
-     */
-    public Nodo getNodo(int posicion) {
-        if (posicion >= 0 && posicion < size) {
-            Nodo aux = pFirst;
-            for (int i = 0; i < posicion; i++) {
-                aux = aux.getPnext();
-            }
-            return aux;
-        }
-        return null;
-    }
-
-    /**
-     * Obtiene la posición de un nodo en la lista.
-     * 
-     * @param nodito El nodo cuya posición se desea obtener.
-     * @return La posición del nodo o {@code -1} si no se encuentra en la lista.
-     */
-    public int getIndex(Nodo nodito) {
-        if (!isEmpty()) {
-            Nodo aux = pFirst;
-            int count = 0;
-            while (aux != null) {
-                if (nodito == aux) {
-                    return count;
-                }
-                count++;
-                aux = aux.getPnext();
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * Obtiene la posición de un elemento en la lista según su valor.
-     * 
-     * @param referencia El valor del nodo a buscar.
-     * @return La posición del nodo o {@code -1} si no se encuentra.
-     */
-    public int getPosicion(Object referencia) {
-        if (buscar(referencia)) {
-            Nodo aux = pFirst;
-            int cont = 0;
-            while (referencia != aux.getDato()) {
-                cont++;
-                aux = aux.getPnext();
-            }
-            return cont;
-        }
-        return -1;
     }
 
     /**
