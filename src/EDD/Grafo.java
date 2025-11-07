@@ -6,26 +6,60 @@ package EDD;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Representa un grafo de usuarios utilizando una lista enlazada de vértices.
+ * Cada vértice corresponde a un usuario y mantiene una lista de adyacencias que
+ * modela las relaciones de seguimiento entre ellos.
+ */
 public class Grafo {
 
+    /**
+     * Lista de usuarios (vértices) que conforman el grafo.
+     */
     private Lista usuarios;
 
+    /**
+     * Crea un nuevo grafo vacío inicializando la lista de usuarios.
+     */
     public Grafo() {
         this.usuarios = new Lista();
     }
 
+    /**
+     * Obtiene la lista de usuarios del grafo.
+     *
+     * @return la lista de usuarios representada por {@link Lista}
+     */
     public Lista getUsuarios() {
         return usuarios;
     }
 
-    public void setEstaciones(Lista usuarios) {
+    /**
+     * Establece la lista de usuarios del grafo.
+     *
+     * @param usuarios nueva lista de usuarios que reemplazará a la actual
+     */
+    public void setUsuarios(Lista usuarios) {
         this.usuarios = usuarios;
     }
 
+    /**
+     * Verifica si el grafo no contiene usuarios.
+     *
+     * @return {@code true} si la lista de usuarios está vacía, {@code false} en
+     * caso contrario
+     */
     public boolean isEmpty() {
         return this.usuarios.isEmpty();
     }
 
+    /**
+     * Busca un usuario en el grafo por su nombre.
+     *
+     * @param nombreUsuario nombre del usuario a buscar
+     * @return el vértice correspondiente al usuario si existe, o {@code null}
+     * si no se encuentra
+     */
     public Vertice buscar(String nombreUsuario) {
         if (!this.isEmpty()) {
             Nodo aux = this.usuarios.getpFirst();
@@ -41,6 +75,12 @@ public class Grafo {
         return null;
     }
 
+    /**
+     * Inserta un nuevo usuario en el grafo usando su nombre, si no existe ya.
+     * En caso de existir, muestra un mensaje de advertencia.
+     *
+     * @param nombreUsuario nombre del nuevo usuario a insertar
+     */
     public void insertarUsuario(String nombreUsuario) {
         if (this.buscar(nombreUsuario) == null) {
             Vertice vertice = new Vertice(nombreUsuario);
@@ -51,6 +91,12 @@ public class Grafo {
         }
     }
 
+    /**
+     * Inserta un usuario ya creado (vértice) en el grafo si no existe uno con
+     * el mismo nombre. En caso de existir, muestra un mensaje de advertencia.
+     *
+     * @param usuario vértice que representa al usuario a insertar
+     */
     public void insertarUsuario2(Vertice usuario) {
         if (this.buscar(usuario.getNombre()) == null) {
             usuario.setNumVertice(this.usuarios.getSize());
@@ -60,7 +106,14 @@ public class Grafo {
         }
     }
 
-    //Tiene un pequeño bug
+    /**
+     * Crea una relación de seguimiento entre dos usuarios. El usuario
+     * {@code nombreUsuario1} comenzará a seguir a {@code nombreUsuario2}.
+     * Muestra mensajes dependiendo de si los usuarios existen o no.
+     *
+     * @param nombreUsuario1 nombre del usuario que seguirá a otro
+     * @param nombreUsuario2 nombre del usuario que será seguido
+     */
     public void seguirUsuario(String nombreUsuario1, String nombreUsuario2) {
         if (this.buscar(nombreUsuario1) != null && this.buscar(nombreUsuario2) != null) {
             Vertice usuarioInicial = buscar(nombreUsuario1);
@@ -79,6 +132,15 @@ public class Grafo {
         }
     }
 
+    /**
+     * Crea una relación de seguimiento entre dos usuarios, pensada para uso
+     * durante la carga inicial de datos. No muestra el mensaje de confirmación
+     * de seguimiento exitoso, pero sí muestra mensajes de error si algún
+     * usuario no existe.
+     *
+     * @param nombreUsuario1 nombre del usuario que seguirá a otro
+     * @param nombreUsuario2 nombre del usuario que será seguido
+     */
     public void seguirUsuarioCarga(String nombreUsuario1, String nombreUsuario2) {
         if (this.buscar(nombreUsuario1) != null && this.buscar(nombreUsuario2) != null) {
             Vertice usuarioInicial = buscar(nombreUsuario1);
@@ -97,6 +159,14 @@ public class Grafo {
         }
     }
 
+    /**
+     * Elimina la relación de seguimiento entre dos usuarios si existe. El
+     * usuario {@code nombreUsuario1} dejará de seguir a {@code nombreUsuario2}.
+     * Muestra mensajes informativos o de error según corresponda.
+     *
+     * @param nombreUsuario1 nombre del usuario que deja de seguir
+     * @param nombreUsuario2 nombre del usuario que era seguido
+     */
     public void dejarDeSeguir(String nombreUsuario1, String nombreUsuario2) {
         if (this.buscar(nombreUsuario1) != null && this.buscar(nombreUsuario2) != null) {
             Vertice usuarioInicial = buscar(nombreUsuario1);
@@ -120,6 +190,13 @@ public class Grafo {
         }
     }
 
+    /**
+     * Muestra mediante un cuadro de diálogo la lista de usuarios adyacentes
+     * (aquellos a los que sigue) un usuario dado.
+     *
+     * @param nombreUsuario nombre del usuario del que se desea ver sus
+     * adyacentes
+     */
     public void getAdjacent(String nombreUsuario) {
         if (this.buscar(nombreUsuario) != null) {
             Vertice usuario = this.buscar(nombreUsuario);
@@ -129,6 +206,20 @@ public class Grafo {
         }
     }
 
+    /**
+     * Elimina completamente un usuario del grafo. Esto incluye:
+     * 
+     * Eliminarlo de la lista principal de usuarios.
+     * Eliminar todas las referencias a él en las listas de adyacencia de
+     * los demás usuarios.
+     * Re-enumerar los índices {@code numVertice} de los vértices
+     * restantes.
+     * 
+     * Muestra mensajes informativos si el grafo está vacío o si el usuario no
+     * existe.
+     *
+     * @param nombreUsuario nombre del usuario que se desea eliminar
+     */
     public void eliminarUsuario(String nombreUsuario) {
         if (this.isEmpty()) {
             JOptionPane.showMessageDialog(null, "El grafo está vacío.");
@@ -176,10 +267,22 @@ public class Grafo {
         JOptionPane.showMessageDialog(null, "Usuario " + nombreUsuario + " eliminado correctamente.");
     }
 
+    /**
+     * Destruye el contenido lógico del grafo reinicializando la lista de
+     * usuarios a una nueva instancia vacía.
+     */
     public void destruir() {
         this.usuarios = new Lista();
     }
 
+    /**
+     * Devuelve una representación textual del grafo, donde cada línea contiene
+     * el nombre de un usuario seguido de sus adyacentes. Si el grafo está
+     * vacío, devuelve el texto {@code "Grafo vacio"}.
+     *
+     * @return una cadena con la representación de los usuarios y sus
+     * adyacencias, o {@code "Grafo vacio"} si no hay usuarios
+     */
     @Override
     public String toString() {
         if (!this.isEmpty()) {

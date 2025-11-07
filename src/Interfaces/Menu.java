@@ -71,6 +71,11 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(cargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 130, -1));
 
         agregar.setText("Conexion Fuerte");
+        agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarActionPerformed(evt);
+            }
+        });
         jPanel1.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 130, -1));
 
         agregar1.setText("Agregar Usuario");
@@ -123,6 +128,17 @@ public class Menu extends javax.swing.JFrame {
         Guardar guardar = new Guardar(grafo);
         guardar.guardarEnTest("grafoTXT");
     }//GEN-LAST:event_guardarActionPerformed
+
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+
+        System.setProperty("org.graphstream.ui", "swing");
+        System.setProperty("org.graphstream.ui.layout.spring.length", "200");
+        System.setProperty("org.graphstream.ui.layout.spring.stiffness", "0.05");
+
+        GrafoVisualizadorSCC vis = new GrafoVisualizadorSCC(CargarArchivo.grafo);
+        vis.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_agregarActionPerformed
 
     /**
      * @param args the command line arguments
