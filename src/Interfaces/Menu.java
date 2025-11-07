@@ -4,6 +4,7 @@
  */
 package Interfaces;
 
+import GestionArchivos.Guardar;
 import static Interfaces.CargarArchivo.grafo;
 
 public class Menu extends javax.swing.JFrame {
@@ -34,7 +35,7 @@ public class Menu extends javax.swing.JFrame {
         cargar = new javax.swing.JButton();
         agregar = new javax.swing.JButton();
         agregar1 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        guardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -46,6 +47,11 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
 
         eliminar.setText("Eliminar Usuario");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
         jPanel1.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 130, -1));
 
         mostrar.setText("Mostrar Grafo");
@@ -68,10 +74,20 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 130, -1));
 
         agregar1.setText("Agregar Usuario");
+        agregar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregar1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(agregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 130, -1));
 
-        jButton1.setText("Guardar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 130, -1));
+        guardar.setText("Guardar");
+        guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 130, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 260));
 
@@ -92,6 +108,21 @@ public class Menu extends javax.swing.JFrame {
         CargarArchivo cargar = new CargarArchivo();
         this.dispose();
     }//GEN-LAST:event_cargarActionPerformed
+
+    private void agregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar1ActionPerformed
+        AgregarUsuario agregar = new AgregarUsuario();
+        this.dispose();
+    }//GEN-LAST:event_agregar1ActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        EliminarUsuarios eliminarU = new EliminarUsuarios();
+        this.dispose();
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        Guardar guardar = new Guardar(grafo);
+        guardar.guardarEnTest("grafoTXT");
+    }//GEN-LAST:event_guardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,7 +164,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton agregar1;
     private javax.swing.JButton cargar;
     private javax.swing.JButton eliminar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton mostrar;

@@ -78,7 +78,7 @@ public class Grafo {
             }
         }
     }
-    
+
     public void seguirUsuarioCarga(String nombreUsuario1, String nombreUsuario2) {
         if (this.buscar(nombreUsuario1) != null && this.buscar(nombreUsuario2) != null) {
             Vertice usuarioInicial = buscar(nombreUsuario1);
@@ -129,6 +129,53 @@ public class Grafo {
         }
     }
 
+    public void eliminarUsuario(String nombreUsuario) {
+        if (this.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El grafo está vacío.");
+            return;
+        }
+
+        //Buscar el vértice a eliminar
+        Vertice usuarioAEliminar = this.buscar(nombreUsuario);
+        if (usuarioAEliminar == null) {
+            JOptionPane.showMessageDialog(null, "El usuario " + nombreUsuario + " no existe.");
+            return;
+        }
+
+        //Desligar al usuario de TODAS las listas de adyacencia
+        Nodo aux = this.usuarios.getpFirst();
+        while (aux != null) {
+            Vertice v = (Vertice) aux.getDato();
+
+            if (v != usuarioAEliminar) {
+                Lista adys = v.getAdyacentes();
+
+                // Como tu Lista.buscar() y eliminarPorReferencia() trabajan por ==,
+                // podemos eliminar por referencia al objeto usuarioAEliminar.
+                while (adys.buscar(usuarioAEliminar)) {
+                    adys.eliminarPorReferencia(usuarioAEliminar);
+                }
+            }
+
+            aux = aux.getPnext();
+        }
+
+        //Eliminar el vértice de la lista principal de usuarios
+        this.usuarios.eliminarPorReferencia(usuarioAEliminar);
+
+        //Re-enumerar numVertice para mantenerlos coherentes
+        aux = this.usuarios.getpFirst();
+        int idx = 0;
+        while (aux != null) {
+            Vertice v = (Vertice) aux.getDato();
+            v.setNumVertice(idx);
+            idx++;
+            aux = aux.getPnext();
+        }
+
+        JOptionPane.showMessageDialog(null, "Usuario " + nombreUsuario + " eliminado correctamente.");
+    }
+
     public void destruir() {
         this.usuarios = new Lista();
     }
@@ -138,7 +185,7 @@ public class Grafo {
         if (!this.isEmpty()) {
             String usuariosStr = "";
             Nodo aux = this.usuarios.getpFirst();
-            while (aux.getPnext()!= null) {
+            while (aux.getPnext() != null) {
                 Vertice verticeActual = (Vertice) aux.getDato();
                 usuariosStr += verticeActual.getNombre() + " ---> " + verticeActual.printAdy() + "\n";
                 aux = aux.getPnext();
@@ -147,7 +194,7 @@ public class Grafo {
             usuariosStr += verticeActual.getNombre() + " ---> " + verticeActual.printAdy();
             return usuariosStr;
         } else {
-            return "Grafo vacion";
+            return "Grafo vacio";
         }
     }
 }

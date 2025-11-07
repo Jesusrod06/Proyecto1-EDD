@@ -4,12 +4,16 @@
  */
 package Interfaces;
 
-public class Bienvenido extends javax.swing.JFrame {
+import GestionArchivos.Cargar;
+import static Interfaces.CargarArchivo.grafo;
+
+
+public class ElegirCarga extends javax.swing.JFrame {
 
     /**
-     * Creates new form Bienvenido
+     * Creates new form ElegirCarga
      */
-    public Bienvenido() {
+    public ElegirCarga() {
         initComponents();
         this.setVisible(true);
         this.setResizable(false);
@@ -27,47 +31,54 @@ public class Bienvenido extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        empezar = new javax.swing.JButton();
-        exit = new javax.swing.JButton();
+        cargarNuevo = new javax.swing.JButton();
+        cargarAnterior = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
-        jLabel1.setText("BIENVENIDOS");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
+        jLabel1.setText("Cargar Ultimo Grafo");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
 
-        empezar.setText("Empezar");
-        empezar.addActionListener(new java.awt.event.ActionListener() {
+        cargarNuevo.setText("Cargar Nuevo Grafo");
+        cargarNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                empezarActionPerformed(evt);
+                cargarNuevoActionPerformed(evt);
             }
         });
-        jPanel1.add(empezar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 190, -1));
+        jPanel1.add(cargarNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 180, -1));
 
-        exit.setText("X");
-        exit.addActionListener(new java.awt.event.ActionListener() {
+        cargarAnterior.setText("Cargar Ultimo Grafo");
+        cargarAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitActionPerformed(evt);
+                cargarAnteriorActionPerformed(evt);
             }
         });
-        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(385, 0, 60, 50));
+        jPanel1.add(cargarAnterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 200, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 270));
+        jButton1.setText("<-");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 210));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitActionPerformed
-
-    private void empezarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empezarActionPerformed
-        ElegirCarga elegirC = new ElegirCarga();
+    private void cargarNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarNuevoActionPerformed
+        CargarArchivo carga = new CargarArchivo();
         this.dispose();
-    }//GEN-LAST:event_empezarActionPerformed
+    }//GEN-LAST:event_cargarNuevoActionPerformed
+
+    private void cargarAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarAnteriorActionPerformed
+        Cargar cargador = new Cargar(grafo);
+        cargador.cargarDesdeRecursoTest("grafoTXT");
+        Menu menu = new Menu();
+        this.dispose();
+    }//GEN-LAST:event_cargarAnteriorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -86,27 +97,28 @@ public class Bienvenido extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Bienvenido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ElegirCarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Bienvenido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ElegirCarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Bienvenido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ElegirCarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Bienvenido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ElegirCarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Bienvenido().setVisible(true);
+                new ElegirCarga().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton empezar;
-    private javax.swing.JButton exit;
+    private javax.swing.JButton cargarAnterior;
+    private javax.swing.JButton cargarNuevo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
