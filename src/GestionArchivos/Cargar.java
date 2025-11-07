@@ -7,6 +7,10 @@ package GestionArchivos;
 import EDD.Grafo;
 import EDD.Lista;
 import EDD.Nodo;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import javax.swing.JOptionPane;
 
 public class Cargar {
@@ -90,8 +94,8 @@ public class Cargar {
                 if (!linea.startsWith("@")) {
                     grafo.destruir();
                     JOptionPane.showMessageDialog(
-                        null,
-                        "Error de formato en usuarios: la línea '" + linea + "' no comienza con '@'."
+                            null,
+                            "Error de formato en usuarios: la línea '" + linea + "' no comienza con '@'."
                     );
                     return;
                 }
@@ -127,9 +131,9 @@ public class Cargar {
                     if (partes.length != 2) {
                         grafo.destruir();
                         JOptionPane.showMessageDialog(
-                            null,
-                            "Error de formato en relaciones: la línea '" + linea +
-                            "' no tiene el formato '@usuario1, @usuario2'."
+                                null,
+                                "Error de formato en relaciones: la línea '" + linea
+                                + "' no tiene el formato '@usuario1, @usuario2'."
                         );
                         return;
                     }
@@ -141,22 +145,22 @@ public class Cargar {
                     if (!usuario1.startsWith("@") || !usuario2.startsWith("@")) {
                         grafo.destruir();
                         JOptionPane.showMessageDialog(
-                            null,
-                            "Error de formato en relaciones: la línea '" + linea +
-                            "' contiene usuarios sin '@'."
+                                null,
+                                "Error de formato en relaciones: la línea '" + linea
+                                + "' contiene usuarios sin '@'."
                         );
                         return;
                     }
 
                     // Validar que existan en la lista de usuarios
-                    if (!listaContieneString(usuariosLista, usuario1) ||
-                        !listaContieneString(usuariosLista, usuario2)) {
+                    if (!listaContieneString(usuariosLista, usuario1)
+                            || !listaContieneString(usuariosLista, usuario2)) {
 
                         grafo.destruir();
                         JOptionPane.showMessageDialog(
-                            null,
-                            "Error: en la relación '" + linea +
-                            "' alguno de los usuarios no está en la lista de usuarios."
+                                null,
+                                "Error: en la relación '" + linea
+                                + "' alguno de los usuarios no está en la lista de usuarios."
                         );
                         return;
                     }
@@ -170,7 +174,6 @@ public class Cargar {
             }
 
             // 4) Si todo es válido, reconstruimos el grafo
-
             grafo.destruir(); // Limpiar grafo anterior
 
             // Cargar usuarios
@@ -193,8 +196,42 @@ public class Cargar {
         } catch (Exception e) {
             grafo.destruir();
             JOptionPane.showMessageDialog(
-                null,
-                "Error inesperado al cargar el grafo: " + e.getMessage()
+                    null,
+                    "Error inesperado al cargar el grafo: " + e.getMessage()
+            );
+        }
+    }
+
+    public void cargarDesdeRecursoTest(String nombreRecurso) {
+        String ruta = "/test/" + nombreRecurso;  
+
+        try (InputStream is = getClass().getResourceAsStream(ruta)) {
+            if (is == null) {
+                grafo.destruir();
+                JOptionPane.showMessageDialog(
+                        null,
+                        "No se encontró el recurso: " + ruta
+                );
+                return;
+            }
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            String linea;
+
+            while ((linea = br.readLine()) != null) {
+                sb.append(linea).append("\n");
+            }
+
+            // Guardamos el contenido en txt y llamamos a tu método de parseo
+            this.txt = sb.toString();
+            this.cargarTxt();
+
+        } catch (IOException e) {
+            grafo.destruir();
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Error al leer el archivo de test: " + e.getMessage()
             );
         }
     }
